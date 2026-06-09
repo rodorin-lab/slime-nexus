@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash scripts/start-server.sh --project-dir /home/rodorin/2.5Dgame)",
+      "Bash(bash scripts/stop-server.sh /home/rodorin/2.5Dgame/.superpowers/brainstorm/1030741-1773879594)"
+    ]
+  }
+}

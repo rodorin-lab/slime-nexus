@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SLIME://NEXUS</title>
+  <link rel="stylesheet" href="/src/ui/styles.css" />
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game-canvas"></canvas>
+    
+    <div id="ui-layer" class="crt-overlay">
+      <header id="top-bar">
+        <div class="neon-text">SLIME://NEXUS</div>
+        <div id="player-info">
+          <span id="credits">Credits: 1000</span>
+          <span id="day">Day: 1</span>
+        </div>
+      </header>
+      
+      <main id="main-screen">
+        <div id="slime-viewer"></div>
+        <div id="action-panel" class="hidden">
+          <button class="cyber-btn" data-action="feed">エサをあげる</button>
+          <button class="cyber-btn" data-action="train">トレーニング</button>
+          <button class="cyber-btn" data-action="rest">休息させる</button>
+          <button class="cyber-btn" data-action="battle">バトル</button>
+          <button class="cyber-btn" data-action="fuse">合成ラボ</button>
+        </div>
+        <div id="stats-panel" class="hidden">
+          <div class="stat-row">
+            <span>HP</span>
+            <div class="stat-bar"><div id="hp-bar" class="fill hp"></div></div>
+          </div>
+          <div class="stat-row">
+            <span>ATK</span>
+            <div class="stat-bar"><div id="atk-bar" class="fill atk"></div></div>
+          </div>
+          <div class="stat-row">
+            <span>DEF</span>
+            <div class="stat-bar"><div id="def-bar" class="fill def"></div></div>
+          </div>
+          <div class="stat-row">
+            <span>SPD</span>
+            <div class="stat-bar"><div id="spd-bar" class="fill spd"></div></div>
+          </div>
+          <div class="stat-row">
+            <span>Stress</span>
+            <div class="stat-bar"><div id="stress-bar" class="fill stress"></div></div>
+          </div>
+          <div class="stat-row">
+            <span>Affection</span>
+            <div class="stat-bar"><div id="affection-bar" class="fill affection"></div></div>
+          </div>
+        </div>
+      </main>
+      
+      <footer id="bottom-bar">
+        <div id="log-area"></div>
+        <nav id="main-nav">
+          <button class="nav-btn" data-scene="raising">育成</button>
+          <button class="nav-btn" data-scene="explore">探索</button>
+          <button class="nav-btn" data-scene="battle">バトル</button>
+          <button class="nav-btn" data-scene="fusion">合成</button>
+          <button class="nav-btn" data-scene="codex">図鑑</button>
+        </nav>
+      </footer>
+    </div>
+  </div>
+  
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

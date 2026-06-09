@@ -1,0 +1,101 @@
+<style>
+  body { background: #0a0a12; font-family: 'Courier New', monospace; }
+  .cyber-title {
+    text-align: center;
+    padding: 60px 20px 20px;
+    color: #00ffe7;
+    font-size: 2.2em;
+    font-weight: bold;
+    text-shadow: 0 0 20px #00ffe7, 0 0 40px #00ffe7aa;
+    letter-spacing: 0.15em;
+  }
+  .cyber-sub {
+    text-align: center;
+    color: #ff2d78;
+    font-size: 1em;
+    letter-spacing: 0.3em;
+    text-shadow: 0 0 10px #ff2d78;
+    margin-bottom: 40px;
+  }
+  .rain {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .drop {
+    position: absolute;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, #00ffe744);
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    from { transform: translateY(-100px); opacity: 0.6; }
+    to { transform: translateY(120vh); opacity: 0; }
+  }
+  .panel {
+    background: rgba(0,255,231,0.04);
+    border: 1px solid #00ffe733;
+    border-radius: 4px;
+    padding: 24px 32px;
+    max-width: 640px;
+    margin: 0 auto 24px;
+    color: #b0f0e8;
+    font-size: 0.95em;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+  }
+  .panel .tag {
+    color: #ff2d78;
+    font-weight: bold;
+  }
+  .slime {
+    text-align: center;
+    font-size: 3em;
+    animation: bounce 1.5s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+  }
+  @keyframes bounce {
+    0%,100% { transform: scaleY(1) scaleX(1); }
+    40% { transform: scaleY(0.85) scaleX(1.15); }
+    60% { transform: scaleY(1.12) scaleX(0.92); }
+  }
+  .blink {
+    animation: blink 1.2s step-end infinite;
+    color: #00ffe7;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+</style>
+
+<div class="rain" id="rain"></div>
+
+<div class="cyber-title">SLIME://NEXUS</div>
+<div class="cyber-sub">2.5D CYBERPUNK CREATURE RAISING</div>
+
+<div class="slime">🟢</div>
+
+<div class="panel">
+  <span class="tag">&gt; SYSTEM BOOT...</span><br>
+  プロジェクト設計ブレインストーミング開始。<br><br>
+  ビジュアル: <span class="tag">Octopath Traveler 2.5D</span><br>
+  インスパイア: <span class="tag">Digimon × Monster Farm</span><br>
+  テーマ: <span class="tag">雨の路地裏 × ネオンライト × プニプニスライム</span><br><br>
+  <span class="blink">■</span> ターミナルで質問に答えてください...
+</div>
+
+<script>
+  // Generate rain drops
+  const rain = document.getElementById('rain');
+  for (let i = 0; i < 60; i++) {
+    const drop = document.createElement('div');
+    drop.className = 'drop';
+    drop.style.left = Math.random() * 100 + 'vw';
+    drop.style.height = (40 + Math.random() * 80) + 'px';
+    drop.style.animationDuration = (0.6 + Math.random() * 1.2) + 's';
+    drop.style.animationDelay = (Math.random() * 2) + 's';
+    rain.appendChild(drop);
+  }
+</script>

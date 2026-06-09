@@ -1,0 +1,166 @@
+<style>
+  body { background: #07070f; font-family: 'Courier New', monospace; }
+  h2 { color: #00ffe7; text-shadow: 0 0 16px #00ffe7aa; letter-spacing: 0.1em; text-align:center; margin-bottom:4px; }
+  .subtitle { color: #7a8fa0; text-align:center; font-size:0.85em; letter-spacing:0.15em; margin-bottom:28px; }
+
+  .tree-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .tree-block {
+    background: rgba(0,255,231,0.03);
+    border: 1px solid #00ffe722;
+    border-radius: 6px;
+    padding: 16px 20px;
+  }
+  .tree-block.highlight {
+    border-color: #00ffe766;
+    background: rgba(0,255,231,0.06);
+  }
+
+  .tree-title {
+    color: #ff2d78;
+    font-size: 0.78em;
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .tree {
+    font-size: 0.78em;
+    line-height: 1.8;
+    color: #b0ccc8;
+  }
+  .tree .dir { color: #00ffe7; font-weight: bold; }
+  .tree .file { color: #7db8b0; }
+  .tree .comment { color: #3a5a58; font-size: 0.9em; }
+  .tree .key { color: #ff9f43; }
+  .tree .indent1 { padding-left: 16px; }
+  .tree .indent2 { padding-left: 32px; }
+  .tree .indent3 { padding-left: 48px; }
+
+  .legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px auto;
+    max-width: 900px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75em;
+    color: #7a8fa0;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  .full-tree {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid #00ffe722;
+    border-radius: 6px;
+    padding: 20px 28px;
+    font-size: 0.78em;
+    line-height: 1.85;
+    color: #b0ccc8;
+    white-space: pre;
+  }
+</style>
+
+<h2>ディレクトリ構造</h2>
+<p class="subtitle">Godot 4 — SLIME://NEXUS プロジェクト</p>
+
+<div class="legend">
+  <div class="legend-item"><div class="dot" style="background:#00ffe7"></div> コアシステム</div>
+  <div class="legend-item"><div class="dot" style="background:#ff2d78"></div> ゲームデータ (Resource)</div>
+  <div class="legend-item"><div class="dot" style="background:#ff9f43"></div> ビジュアル / アセット</div>
+  <div class="legend-item"><div class="dot" style="background:#b07aff"></div> シーン / UI</div>
+</div>
+
+<div class="full-tree"><span style="color:#00ffe7;font-weight:bold">slime_nexus/</span>                         <span style="color:#3a5a58"># Godot 4 プロジェクトルート</span>
+<span style="color:#3a5a58">│</span>
+<span style="color:#3a5a58">├──</span> <span style="color:#ff2d78">project.godot</span>
+<span style="color:#3a5a58">├──</span> <span style="color:#ff2d78">.gitignore</span>
+<span style="color:#3a5a58">│</span>
+<span style="color:#3a5a58">├──</span> <span style="color:#00ffe7;font-weight:bold">autoloads/</span>                       <span style="color:#3a5a58"># グローバルシングルトン（最小限）</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#7db8b0">game_state.gd</span>               <span style="color:#3a5a58"># 現在のシーン・プレイヤー状態</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#7db8b0">save_system.gd</span>              <span style="color:#3a5a58"># セーブ/ロード (JSON)</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#7db8b0">audio_manager.gd</span>            <span style="color:#3a5a58"># BGM・SE管理</span>
+<span style="color:#3a5a58">│   └──</span> <span style="color:#7db8b0">event_bus.gd</span>                <span style="color:#3a5a58"># グローバルシグナルバス</span>
+<span style="color:#3a5a58">│</span>
+<span style="color:#3a5a58">├──</span> <span style="color:#ff2d78;font-weight:bold">resources/</span>                       <span style="color:#3a5a58"># Godot Resource (.tres) — ゲームデータの核</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#ff2d78">slimes/</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">slime_definition.gd</span>      <span style="color:#3a5a58"># Resource基底クラス（種族定義）</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">data/</span>
+<span style="color:#3a5a58">│   │   │   ├──</span> <span style="color:#ff9f43">proto_slime.tres</span>     <span style="color:#3a5a58"># 原種スライム</span>
+<span style="color:#3a5a58">│   │   │   ├──</span> <span style="color:#ff9f43">neon_slime.tres</span>      <span style="color:#3a5a58"># ネオンスライム</span>
+<span style="color:#3a5a58">│   │   │   └──</span> <span style="color:#ff9f43">...（種族ファイル）</span>
+<span style="color:#3a5a58">│   │   └──</span> <span style="color:#7db8b0">slime_instance.gd</span>        <span style="color:#3a5a58"># 実際に育てているスライムの状態</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#ff2d78">evolution/</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">evolution_path.gd</span>        <span style="color:#3a5a58"># 進化条件・分岐ルート Resource</span>
+<span style="color:#3a5a58">│   │   └──</span> <span style="color:#ff9f43">evolution_tree.tres</span>      <span style="color:#3a5a58"># 全進化ツリーデータ</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#ff2d78">items/</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">item_definition.gd</span>
+<span style="color:#3a5a58">│   │   └──</span> <span style="color:#ff9f43">data/</span>                    <span style="color:#3a5a58"># エサ・サイバーパーツ・素材</span>
+<span style="color:#3a5a58">│   └──</span> <span style="color:#ff2d78">skills/</span>
+<span style="color:#3a5a58">│       ├──</span> <span style="color:#7db8b0">skill_definition.gd</span>
+<span style="color:#3a5a58">│       └──</span> <span style="color:#ff9f43">data/</span>                     <span style="color:#3a5a58"># バトルスキルデータ</span>
+<span style="color:#3a5a58">│</span>
+<span style="color:#3a5a58">├──</span> <span style="color:#b07aff;font-weight:bold">scenes/</span>                          <span style="color:#3a5a58"># シーン — 描画と演出</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#b07aff">main/</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">main.tscn</span>                <span style="color:#3a5a58"># エントリーポイント</span>
+<span style="color:#3a5a58">│   │   └──</span> <span style="color:#7db8b0">title_screen.tscn</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#b07aff">world/</span>                       <span style="color:#3a5a58"># 3D探索マップ（Octopath風）</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">world_map.tscn</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">alley_stage.tscn</span>         <span style="color:#3a5a58"># 雨の路地裏ステージ</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">neon_district.tscn</span>       <span style="color:#3a5a58"># ネオン街区</span>
+<span style="color:#3a5a58">│   │   └──</span> <span style="color:#7db8b0">components/</span>              <span style="color:#3a5a58"># 再利用可能なステージ部品</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#b07aff">raising/</span>                     <span style="color:#3a5a58"># スライム育成画面</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">raising_room.tscn</span>        <span style="color:#3a5a58"># メイン育成UI</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">slime_viewer.tscn</span>        <span style="color:#3a5a58"># スライム3Dビューア</span>
+<span style="color:#3a5a58">│   │   └──</span> <span style="color:#7db8b0">fusion_lab.tscn</span>          <span style="color:#3a5a58"># 合成ラボ</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#b07aff">battle/</span>                      <span style="color:#3a5a58"># バトルシステム</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">battle_arena.tscn</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">battle_manager.gd</span>        <span style="color:#3a5a58"># バトルロジック制御</span>
+<span style="color:#3a5a58">│   │   └──</span> <span style="color:#7db8b0">components/</span>              <span style="color:#3a5a58"># HPバー・スキルボタン等</span>
+<span style="color:#3a5a58">│   └──</span> <span style="color:#b07aff">ui/</span>                          <span style="color:#3a5a58"># レトロフューチャーUI部品</span>
+<span style="color:#3a5a58">│       ├──</span> <span style="color:#7db8b0">hud.tscn</span>
+<span style="color:#3a5a58">│       ├──</span> <span style="color:#7db8b0">slime_codex.tscn</span>         <span style="color:#3a5a58"># 図鑑</span>
+<span style="color:#3a5a58">│       ├──</span> <span style="color:#7db8b0">cyber_menu.tscn</span>          <span style="color:#3a5a58"># メニュー</span>
+<span style="color:#3a5a58">│       └──</span> <span style="color:#7db8b0">theme/</span>                   <span style="color:#3a5a58"># UIテーマ (.theme)</span>
+<span style="color:#3a5a58">│</span>
+<span style="color:#3a5a58">├──</span> <span style="color:#00ffe7;font-weight:bold">systems/</span>                         <span style="color:#3a5a58"># 純粋ロジック（Node不要のGDScript）</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#7db8b0">evolution_system.gd</span>          <span style="color:#3a5a58"># 進化条件チェック・処理</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#7db8b0">fusion_system.gd</span>             <span style="color:#3a5a58"># 合成アルゴリズム</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#7db8b0">battle_calculator.gd</span>         <span style="color:#3a5a58"># ダメージ計算・ターン処理</span>
+<span style="color:#3a5a58">│   └──</span> <span style="color:#7db8b0">raising_calculator.gd</span>        <span style="color:#3a5a58"># 育成パラメータ更新</span>
+<span style="color:#3a5a58">│</span>
+<span style="color:#3a5a58">├──</span> <span style="color:#ff9f43;font-weight:bold">assets/</span>                          <span style="color:#3a5a58"># 生アセット</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#ff9f43">sprites/</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">slimes/</span>                  <span style="color:#3a5a58"># スライムドット絵スプライトシート</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">environment/</span>             <span style="color:#3a5a58"># 背景・小物</span>
+<span style="color:#3a5a58">│   │   └──</span> <span style="color:#7db8b0">ui/</span>                      <span style="color:#3a5a58"># UIアイコン・フレーム</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#ff9f43">shaders/</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">slime_wobble.gdshader</span>    <span style="color:#3a5a58"># プニプニ変形シェーダー</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">neon_glow.gdshader</span>       <span style="color:#3a5a58"># ネオングロウ</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">rain_effect.gdshader</span>     <span style="color:#3a5a58"># 雨エフェクト</span>
+<span style="color:#3a5a58">│   │   └──</span> <span style="color:#7db8b0">scanline_ui.gdshader</span>    <span style="color:#3a5a58"># レトロCRTスキャンライン</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#ff9f43">audio/</span>
+<span style="color:#3a5a58">│   │   ├──</span> <span style="color:#7db8b0">bgm/</span>                     <span style="color:#3a5a58"># サイバーパンクBGM</span>
+<span style="color:#3a5a58">│   │   └──</span> <span style="color:#7db8b0">sfx/</span>                     <span style="color:#3a5a58"># SE（プニプニ音、ネオン音）</span>
+<span style="color:#3a5a58">│   ├──</span> <span style="color:#ff9f43">fonts/</span>                       <span style="color:#3a5a58"># ピクセルフォント / サイバーフォント</span>
+<span style="color:#3a5a58">│   └──</span> <span style="color:#ff9f43">3d_models/</span>                   <span style="color:#3a5a58"># 環境用3Dモデル（低ポリ）</span>
+<span style="color:#3a5a58">│</span>
+<span style="color:#3a5a58">└──</span> <span style="color:#3a5a58">docs/</span>                            <span style="color:#3a5a58"># 設計ドキュメント</span>
+<span style="color:#3a5a58">    └──</span> <span style="color:#3a5a58">superpowers/specs/</span>           <span style="color:#3a5a58"># 本設計書の保存先</span>
+</div>

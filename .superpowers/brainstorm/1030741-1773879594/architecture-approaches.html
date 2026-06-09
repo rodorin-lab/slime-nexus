@@ -1,0 +1,147 @@
+<style>
+  body { background: #07070f; font-family: 'Courier New', monospace; }
+  h2 { color: #00ffe7; text-shadow: 0 0 16px #00ffe7aa; letter-spacing: 0.1em; text-align:center; margin-bottom:4px; }
+  .subtitle { color: #7a8fa0; text-align:center; font-size:0.85em; letter-spacing:0.15em; margin-bottom:32px; }
+
+  .options { display: flex; flex-direction: column; gap: 16px; max-width: 780px; margin: 0 auto; }
+
+  .option {
+    background: rgba(0,255,231,0.03);
+    border: 1px solid #00ffe722;
+    border-radius: 6px;
+    padding: 20px 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .option:hover { border-color: #00ffe766; background: rgba(0,255,231,0.07); }
+  .option.selected { border-color: #00ffe7; background: rgba(0,255,231,0.10); box-shadow: 0 0 20px #00ffe722; }
+
+  .letter {
+    min-width: 36px;
+    height: 36px;
+    border: 2px solid #00ffe7;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00ffe7;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-shadow: 0 0 8px #00ffe7;
+  }
+  .option.selected .letter { background: #00ffe7; color: #07070f; }
+
+  .content h3 { color: #e0f8f5; margin: 0 0 6px; font-size: 1em; }
+  .content .desc { color: #7db8b0; font-size: 0.82em; line-height: 1.7; margin: 0 0 10px; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 0.7em;
+    padding: 2px 8px;
+    border-radius: 12px;
+    letter-spacing: 0.08em;
+  }
+  .tag.good { background: rgba(0,255,100,0.12); color: #00ff64; border: 1px solid #00ff6444; }
+  .tag.bad { background: rgba(255,45,120,0.12); color: #ff2d78; border: 1px solid #ff2d7844; }
+  .tag.neutral { background: rgba(150,100,255,0.12); color: #b07aff; border: 1px solid #b07aff44; }
+
+  .rec-badge {
+    font-size: 0.68em;
+    background: #00ffe7;
+    color: #07070f;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .diagram {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid #00ffe711;
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin: 10px 0 10px;
+    font-size: 0.72em;
+    color: #4ecdc4;
+    line-height: 1.6;
+    white-space: pre;
+    font-family: 'Courier New', monospace;
+  }
+</style>
+
+<h2>アーキテクチャ アプローチ</h2>
+<p class="subtitle">Godot 4 プロジェクト構成の方針を選んでください</p>
+
+<div class="options">
+
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>シーン中心型 (Scene-Centric)</h3>
+      <div class="desc">Godotのシーンツリーにすべてを委ねる。各システム（バトル・育成・探索）を独立したシーンとして実装。Godotのドキュメントに最も沿ったオーソドックスな構成。</div>
+      <div class="diagram">scenes/
+  battle/    ← バトルシーン完結
+  raising/   ← 育成シーン完結
+  world/     ← 探索シーン完結
+  ui/        ← UI部品</div>
+      <div class="tags">
+        <span class="tag good">Godot標準に忠実</span>
+        <span class="tag good">シーン単体でテストしやすい</span>
+        <span class="tag bad">システム間の状態共有が複雑になりがち</span>
+        <span class="tag bad">スライムデータの受け渡しが煩雑</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Autoload重視型 (Service Layer)</h3>
+      <div class="desc">ゲームロジックをAutoload（グローバルシングルトン）に集約。シーンは描画専用の薄い層にする。Unity的なManagerパターン。</div>
+      <div class="diagram">autoloads/
+  GameManager    ← ゲーム全体の状態
+  SlimeManager   ← スライム管理
+  BattleSystem   ← バトルロジック
+  SaveSystem     ← セーブ/ロード
+scenes/        ← 薄い表示レイヤーのみ</div>
+      <div class="tags">
+        <span class="tag good">グローバルアクセスが容易</span>
+        <span class="tag good">システム間連携がシンプル</span>
+        <span class="tag bad">Autoloadが肥大化しやすい</span>
+        <span class="tag bad">テストが難しくなる</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>ハイブリッド型 (Resource + Autoload) <span class="rec-badge">推奨</span></h3>
+      <div class="desc">
+        Godot 4の<strong style="color:#00ffe7">Resourceシステム</strong>でスライムデータを定義し、最小限のAutoloadで状態管理、シーンで描画。各レイヤーの責務が明確で拡張しやすい。
+      </div>
+      <div class="diagram">resources/
+  slime_data/    ← SlimeDefinition.tres（種族定義）
+  evolution/     ← EvolutionPath.tres（進化ルート）
+autoloads/
+  GameState      ← 薄い状態管理のみ
+  SaveSystem     ← セーブ/ロード
+scenes/
+  world/         ← 3D探索マップ
+  battle/        ← バトル演出
+  raising/       ← 育成UI</div>
+      <div class="tags">
+        <span class="tag good">Godot 4のResourceが最大活用できる</span>
+        <span class="tag good">スライムデータをInspectorで編集可能</span>
+        <span class="tag good">レイヤーが明確で保守しやすい</span>
+        <span class="tag neutral">設計の初期コストがやや高い</span>
+      </div>
+    </div>
+  </div>
+
+</div>

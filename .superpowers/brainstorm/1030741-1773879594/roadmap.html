@@ -1,0 +1,239 @@
+<style>
+  body { background: #07070f; font-family: 'Courier New', monospace; }
+  h2 { color: #00ffe7; text-shadow: 0 0 16px #00ffe7aa; letter-spacing: 0.1em; text-align:center; margin-bottom:4px; }
+  .subtitle { color: #7a8fa0; text-align:center; font-size:0.85em; letter-spacing:0.15em; margin-bottom:32px; }
+
+  .roadmap { max-width: 860px; margin: 0 auto; position: relative; }
+
+  .roadmap::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #00ffe7, #ff2d78, #b07aff, #ff9f43, #00ff64);
+    opacity: 0.4;
+  }
+
+  .phase {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .phase-dot {
+    min-width: 58px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    z-index: 1;
+  }
+  .dot-circle {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75em;
+    font-weight: bold;
+    background: #07070f;
+  }
+  .dot-label {
+    font-size: 0.6em;
+    letter-spacing: 0.1em;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .phase-body {
+    flex: 1;
+    border: 1px solid;
+    border-radius: 6px;
+    padding: 16px 20px;
+    background: rgba(0,0,0,0.3);
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .phase-title { font-size: 1em; font-weight: bold; }
+  .phase-sub { font-size: 0.75em; opacity: 0.6; }
+
+  .tasks { list-style: none; padding: 0; margin: 0; }
+  .tasks li {
+    font-size: 0.78em;
+    color: #9abbb8;
+    padding: 2px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.6;
+  }
+  .tasks li::before { content: '▸'; opacity: 0.5; min-width: 12px; }
+
+  .deliverable {
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.72em;
+    letter-spacing: 0.05em;
+  }
+
+  /* Phase colors */
+  .p1 .dot-circle { border-color: #00ffe7; color: #00ffe7; }
+  .p1 .dot-label  { color: #00ffe7; }
+  .p1 .phase-body { border-color: #00ffe733; }
+  .p1 .phase-title { color: #00ffe7; text-shadow: 0 0 10px #00ffe766; }
+  .p1 .deliverable { background: rgba(0,255,231,0.07); color: #00ffe7; border: 1px solid #00ffe722; }
+
+  .p2 .dot-circle { border-color: #ff2d78; color: #ff2d78; }
+  .p2 .dot-label  { color: #ff2d78; }
+  .p2 .phase-body { border-color: #ff2d7833; }
+  .p2 .phase-title { color: #ff2d78; text-shadow: 0 0 10px #ff2d7866; }
+  .p2 .deliverable { background: rgba(255,45,120,0.07); color: #ff2d78; border: 1px solid #ff2d7822; }
+
+  .p3 .dot-circle { border-color: #b07aff; color: #b07aff; }
+  .p3 .dot-label  { color: #b07aff; }
+  .p3 .phase-body { border-color: #b07aff33; }
+  .p3 .phase-title { color: #b07aff; text-shadow: 0 0 10px #b07aff66; }
+  .p3 .deliverable { background: rgba(176,122,255,0.07); color: #b07aff; border: 1px solid #b07aff22; }
+
+  .p4 .dot-circle { border-color: #ff9f43; color: #ff9f43; }
+  .p4 .dot-label  { color: #ff9f43; }
+  .p4 .phase-body { border-color: #ff9f4333; }
+  .p4 .phase-title { color: #ff9f43; text-shadow: 0 0 10px #ff9f4366; }
+  .p4 .deliverable { background: rgba(255,159,67,0.07); color: #ff9f43; border: 1px solid #ff9f4322; }
+
+  .p5 .dot-circle { border-color: #00ff64; color: #00ff64; }
+  .p5 .dot-label  { color: #00ff64; }
+  .p5 .phase-body { border-color: #00ff6433; }
+  .p5 .phase-title { color: #00ff64; text-shadow: 0 0 10px #00ff6466; }
+  .p5 .deliverable { background: rgba(0,255,100,0.07); color: #00ff64; border: 1px solid #00ff6422; }
+</style>
+
+<h2>開発ロードマップ</h2>
+<p class="subtitle">SLIME://NEXUS — 5フェーズ構成</p>
+
+<div class="roadmap">
+
+  <div class="phase p1">
+    <div class="phase-dot">
+      <div class="dot-circle">01</div>
+      <div class="dot-label">PHASE<br>ONE</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-header">
+        <div class="phase-title">FOUNDATION — 基盤構築</div>
+        <div class="phase-sub">プロジェクトセットアップ &amp; 2.5Dレンダリング確立</div>
+      </div>
+      <ul class="tasks">
+        <li>Godot 4 プロジェクト初期化・ディレクトリ構造作成</li>
+        <li>Godot 3D + 2Dスプライトの2.5Dレンダリングパイプライン構築</li>
+        <li>WorldEnvironment設定（ネオンライト・霧・アンビエント）</li>
+        <li>プロトタイプ雨エフェクト実装（GPUパーティクル + シェーダー）</li>
+        <li>サイバーパンクUIテーマ作成（.theme + スキャンラインシェーダー）</li>
+        <li>SlimeDefinition / SlimeInstance Resource基底クラス定義</li>
+        <li>EventBus / GameState / SaveSystem Autoload実装</li>
+      </ul>
+      <div class="deliverable">🎯 成果物: 雨の降る路地裏にスライムが立っているプロトタイプシーン</div>
+    </div>
+  </div>
+
+  <div class="phase p2">
+    <div class="phase-dot">
+      <div class="dot-circle">02</div>
+      <div class="dot-label">PHASE<br>TWO</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-header">
+        <div class="phase-title">SLIME CORE — スライムの核</div>
+        <div class="phase-sub">育成システム &amp; スライムの表現</div>
+      </div>
+      <ul class="tasks">
+        <li>スライムドット絵スプライト + AnimationPlayer（アイドル・食事・喜び・ダメージ）</li>
+        <li>slime_wobble.gdshader — プニプニ変形シェーダー実装</li>
+        <li>育成パラメータシステム（HP・攻撃・防御・ストレス・好感度）</li>
+        <li>エサ・トレーニング・休息アクション実装</li>
+        <li>RaisingRoom シーン + レトロフューチャーUI</li>
+        <li>基本セーブ/ロード動作確認</li>
+        <li>5〜10種のプロトタイプスライム種族データ作成</li>
+      </ul>
+      <div class="deliverable">🎯 成果物: スライムを育てられる最小限のゲームループ完成</div>
+    </div>
+  </div>
+
+  <div class="phase p3">
+    <div class="phase-dot">
+      <div class="dot-circle">03</div>
+      <div class="dot-label">PHASE<br>THREE</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-header">
+        <div class="phase-title">EVOLUTION &amp; FUSION — 進化と合成</div>
+        <div class="phase-sub">デジモン型分岐進化 + モンスターファーム型合成</div>
+      </div>
+      <ul class="tasks">
+        <li>EvolutionPath Resource設計（条件分岐・進化先定義）</li>
+        <li>EvolutionSystem — 進化条件チェック・エフェクト演出</li>
+        <li>FusionSystem — 2体合成アルゴリズム（親パラメータ継承ロジック）</li>
+        <li>FusionLab シーン実装</li>
+        <li>進化エフェクト（ネオングロウ + パーティクル）</li>
+        <li>SlimeCodex（図鑑）UI実装 — 発見済み/未発見表示</li>
+        <li>20〜30種の進化ツリーデータ拡充</li>
+      </ul>
+      <div class="deliverable">🎯 成果物: 育て方で進化が変わり、合成で新種が生まれるシステム完成</div>
+    </div>
+  </div>
+
+  <div class="phase p4">
+    <div class="phase-dot">
+      <div class="dot-circle">04</div>
+      <div class="dot-label">PHASE<br>FOUR</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-header">
+        <div class="phase-title">BATTLE &amp; WORLD — バトルと世界</div>
+        <div class="phase-sub">戦闘システム &amp; 探索マップ</div>
+      </div>
+      <ul class="tasks">
+        <li>BattleCalculator — ターン制バトルロジック（スキル・属性・状態異常）</li>
+        <li>BattleArena シーン — サイバーパンクアリーナ演出</li>
+        <li>スキルエフェクト（ネオン・電撃・スライムビーム）</li>
+        <li>WorldMap シーン — 3D路地裏探索（エンカウント・NPC・ショップ）</li>
+        <li>AlleyStage / NeonDistrict ステージ実装</li>
+        <li>AudioManager — サイバーパンクBGM・SE統合</li>
+        <li>ランダムエンカウントシステム</li>
+      </ul>
+      <div class="deliverable">🎯 成果物: 探索・戦闘・育成が一体化した縦スライスデモ</div>
+    </div>
+  </div>
+
+  <div class="phase p5">
+    <div class="phase-dot">
+      <div class="dot-circle">05</div>
+      <div class="dot-label">PHASE<br>FIVE</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-header">
+        <div class="phase-title">POLISH &amp; RELEASE — 磨き上げとリリース</div>
+        <div class="phase-sub">品質向上・コンテンツ拡充・itch.io配布</div>
+      </div>
+      <ul class="tasks">
+        <li>全シェーダー最終調整（雨・ネオン・スキャンライン・プニプニ）</li>
+        <li>ゲームバランス調整・難易度テスト</li>
+        <li>メインストーリー実装（路地裏の謎・最終ボス）</li>
+        <li>50種以上のスライム種族コンテンツ拡充</li>
+        <li>PC (Windows/Linux/Mac) ビルド・最適化</li>
+        <li>itch.io ストアページ準備・配布</li>
+      </ul>
+      <div class="deliverable">🎯 成果物: itch.io リリース版 v1.0</div>
+    </div>
+  </div>
+
+</div>
